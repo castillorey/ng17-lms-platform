@@ -1,9 +1,27 @@
 <div class="h-full">
-	<div class="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
-		<div class="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm">
+	<div class="h-[80px] md:pl-56 fixed inset-y-0 w-full z-40">
+		<app-navbar (menuToggle)="menuIsOpen = !menuIsOpen"></app-navbar>
+	</div>
+	<!-- Desktop -->
+	<div class="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-40">
+		<div class="h-full border-r overflow-y-auto bg-white shadow-sm">
 			<app-sidebar></app-sidebar>
 		</div>
 	</div>
+
+	<!-- Mobile -->
+	<div [ngClass]="menuIsOpen ? 'block' : 'hidden'"
+		class="min-h-screen w-full fixed top-0 left-0 right-0 backdrop-blur-sm z-50"
+		(click)="menuIsOpen = false">
+	</div>
+	<div [ngClass]="menuIsOpen ? 'w-56' : 'w-0'" 
+		class="flex h-full flex-col fixed inset-y-0 z-50 transition-all duration-300">
+		<div class="h-full border-r overflow-y-auto bg-white shadow-sm">
+			<app-sidebar></app-sidebar>
+		</div>
+	</div>
+
+	<!-- Content -->
 	<div class="md:pl-56 pt-[80px] h-full">
 		<router-outlet />
 	</div>

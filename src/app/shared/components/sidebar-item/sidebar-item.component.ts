@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { LucideAngularModule, Route, Wrench } from 'lucide-angular';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideAngularModule, Wrench } from 'lucide-angular';
 @Component({
   selector: 'app-sidebar-item',
   standalone: true,

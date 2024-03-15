@@ -1,14 +1,16 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
-import { LucideAngularModule } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
     provideClientHydration(),
-    importProvidersFrom(LucideAngularModule.pick({}))
+    importProvidersFrom(LucideAngularModule.pick({})),
+    provideAnimationsAsync(),
   ]
 };

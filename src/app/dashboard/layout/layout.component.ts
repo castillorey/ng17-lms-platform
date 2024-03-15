@@ -1,14 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { CommonModule, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent],
+  imports: [RouterOutlet, CommonModule, NgClass, SidebarComponent, NavbarComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
-  
+  menuIsOpen = false;
+  togglemenu(){
+    this.menuIsOpen = !this.menuIsOpen
+    console.log(this.menuIsOpen)
+  }
 }

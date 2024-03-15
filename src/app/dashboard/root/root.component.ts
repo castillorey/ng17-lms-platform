@@ -9,11 +9,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './root.component.scss'
 })
 export class RootComponent {
-  private readonly route = inject(ActivatedRoute);
-
-  ngOnInit() {
-    this.route.url.subscribe((event) => {
-      console.log(event[0]); // It's an array remember [0]
-    });
-  }
+  
 }
