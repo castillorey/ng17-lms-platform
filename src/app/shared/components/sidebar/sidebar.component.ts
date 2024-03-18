@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { Compass, Layout } from 'lucide-angular';
+import { BarChart, Compass, Layout, List } from 'lucide-angular';
 import { LogoComponent } from '../logo/logo.component';
 import { SidebarItemComponent } from '../sidebar-item/sidebar-item.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const guestRoutes = [
   {
@@ -15,6 +15,19 @@ const guestRoutes = [
     label: 'Browse',
     href: '/search'
   }
+];
+
+const teacherRoutes = [
+  {
+    icon: List,
+    label: "Courses",
+    href: "/teacher/courses",
+  },
+  {
+    icon: BarChart,
+    label: "Analytics",
+    href: "/teacher/analytics",
+  },
 ]
 
 @Component({
@@ -26,5 +39,11 @@ const guestRoutes = [
 })
 
 export class SidebarComponent {
-  routes = guestRoutes;
+  private readonly router = inject(Router);
+  
+  routes = this.isTeacher ? teacherRoutes : guestRoutes;
+
+  get isTeacher(): boolean {
+    return this.router.url.includes("/teacher");
+  }
 }
