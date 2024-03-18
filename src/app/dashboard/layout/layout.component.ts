@@ -13,8 +13,4 @@ import { CommonModule, NgClass } from '@angular/common';
 })
 export class LayoutComponent {
   menuIsOpen = false;
-  togglemenu(){
-    this.menuIsOpen = !this.menuIsOpen
-    console.log(this.menuIsOpen)
-  }
 }

@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LucideAngularModule, Menu } from 'lucide-angular';
+import { NavbarRoutesComponent } from '../navbar-routes/navbar-routes.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, NavbarRoutesComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

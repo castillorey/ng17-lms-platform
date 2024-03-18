@@ -1,0 +1,19 @@
+<div *ngIf="isSearchPage" class="hidden md:block">
+	<!-- <app-search-input></app-search-input> -->
+</div>
+
+<div>
+	<a href="/" *ngIf="isTeacherPage || isCoursePage; else isTeacher">
+		<button class="btn-ghost"> 
+			<lucide-icon [img]="logOutIcon" class="h-4 mr-1 inline-block"></lucide-icon> 
+			<span>Exit</span>
+		</button>
+	</a>
+
+	<ng-template #isTeacher>
+		<a href="/teacher/courses">
+			<button class="btn-ghost"> Teacher mode </button>
+		</a>
+	</ng-template>
+
+</div>
