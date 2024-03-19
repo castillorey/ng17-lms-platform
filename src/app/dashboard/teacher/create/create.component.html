@@ -1,0 +1,27 @@
+<div class="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+	<div>
+		<h1 class="text-2xl">
+			Name your course
+		</h1>
+		<p class="text-sm text-slate-600">
+			What would you like to name your course? Don&apos;t worry, you can change this later.
+		</p>
+		<form [formGroup]="createForm" action="submit" (submit)="onSubmit()" class="mt-4">
+			<input id="title" type="text" class="form-input" formControlName="title" [disabled]="createForm.pending"
+				placeholder="e.g. 'Advanced web development'">
+
+			<div class="mt-2 text-sm text-slate-600">What will you teach in this course?</div>
+
+			<div class="mt-4 flex items-center gap-x-2">
+				<a href="/">
+					<Button class="btn-ghost">
+						Cancel
+					</Button>
+				</a>
+				<Button type="submit" class="btn-primary" [disabled]="!createForm.valid || createForm.pending">
+					Continue
+				</Button>
+			</div>
+		</form>
+	</div>
+</div>

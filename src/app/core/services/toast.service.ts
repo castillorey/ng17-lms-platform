@@ -26,7 +26,7 @@ export class ToastService {
     }, 3000);
   }
 
-  sucess(toastMessage: string): void {
+  success(toastMessage: string): void {
     this.showToast(TOAST_STATE.success, toastMessage);
   }
 

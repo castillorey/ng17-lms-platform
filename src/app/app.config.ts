@@ -5,6 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LucideAngularModule } from 'lucide-angular';
 
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     importProvidersFrom(LucideAngularModule.pick({})),
     provideAnimationsAsync(),
+    provideHttpClient()
   ]
 };
