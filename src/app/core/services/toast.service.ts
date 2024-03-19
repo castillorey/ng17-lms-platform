@@ -4,26 +4,35 @@ export const TOAST_STATE = {
   success: 'success-toast',
   info: 'info-toast',
   warning: 'warning-toast',
-  danger: 'danger-toast'
+  danger: 'danger-toast',
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
   public showsToast = signal(false);
   public toastMessage = signal('Default toast message');
   public toastState = signal(TOAST_STATE.success);
 
-  constructor() { }
+  constructor() {}
   private showToast(toastState: string, toastMessage: string): void {
-    this.toastState.set(toastState);
-    this.toastMessage.set(toastMessage);
-    this.showsToast.set(true);
-
-    setTimeout(()=> {
-      this.dismiss();
-    }, 3000);
+    const setStates = () => {
+      this.toastState.set(toastState);
+      this.toastMessage.set(toastMessage);
+      this.showsToast.set(true);
+    };
+    if (this.showsToast()) {
+      this.dismiss(); // Close open toast
+      setTimeout(() => {
+        setStates(); // Wait till previous toast to be closed
+      }, 200);
+    } else {
+      setStates();
+      setTimeout(() => {
+        this.dismiss();
+      }, 3000);
+    }
   }
 
   success(toastMessage: string): void {
