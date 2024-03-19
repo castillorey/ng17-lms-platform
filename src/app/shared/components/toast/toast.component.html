@@ -1,0 +1,10 @@
+<div [@toastTrigger]="(toast.showsToast()) ? 'open' : 'close' " [class]="toast.toastState()">
+
+	<div style="max-width: 160px;">
+		{{ toast.toastMessage() }}
+	</div>
+
+	<button class="font-medium" (click)="toast.dismiss()">
+		Dismiss
+	</button>
+</div>

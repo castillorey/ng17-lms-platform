@@ -1,0 +1,50 @@
+%default-toast {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  right: 0rem;
+  margin: 2rem;
+  display: inline-flex;
+  min-width: 260px;
+  min-height: 70px;
+  max-height: 70px;
+  box-shadow: 6px 6px 12px #00000040;
+  background-color: white;
+
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 6px solid black;
+  padding: 1.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+// Default toast
+.toast-class {
+  @extend %default-toast;
+}
+
+// Success
+.success-toast {
+  @extend %default-toast;
+  border-left: 6px solid #16a34a;
+}
+
+// Info
+.info-toast {
+  @extend %default-toast;
+  border-left: 6px solid #2563eb;
+}
+
+// Warning
+.warning-toast {
+  @extend %default-toast;
+  border-left: 6px solid #ea580c;
+}
+
+// Danger
+.danger-toast {
+  @extend %default-toast;
+  border-left: 6px solid #dc2626;
+}
