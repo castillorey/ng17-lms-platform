@@ -7,7 +7,7 @@
 			What would you like to name your course? Don&apos;t worry, you can change this later.
 		</p>
 		<form [formGroup]="createForm" action="submit" (submit)="onSubmit()" class="mt-4">
-			<input id="title" type="text" class="form-input" formControlName="title" [disabled]="createForm.pending"
+			<input id="title" type="text" class="form-input" formControlName="title"
 				placeholder="e.g. 'Advanced web development'">
 
 			<div class="mt-2 text-sm text-slate-600">What will you teach in this course?</div>
@@ -18,7 +18,7 @@
 						Cancel
 					</Button>
 				</a>
-				<Button type="submit" class="btn-primary" [disabled]="!createForm.valid || createForm.pending">
+				<Button type="submit" class="btn-primary" [disabled]="!createForm.valid">
 					Continue
 				</Button>
 			</div>

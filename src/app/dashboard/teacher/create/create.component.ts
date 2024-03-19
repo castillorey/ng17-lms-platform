@@ -25,8 +25,10 @@ export class CreateComponent {
 
   onSubmit() {
     try {
+      this.createForm.disable();
       const result = this.http.post("/api/courses", this.createForm.controls.title);
       result.subscribe((response) => this.router.navigateByUrl(`/teacher/courses/${response}`));
+      this.createForm.enable();
       this.toast.success("Course created");
     } catch {
       this.toast.error("Something went wrong");
