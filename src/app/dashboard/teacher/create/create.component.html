@@ -13,14 +13,12 @@
 			<div class="mt-2 text-sm text-slate-600">What will you teach in this course?</div>
 
 			<div class="mt-4 flex items-center gap-x-2">
-				<a href="/">
-					<Button class="btn-ghost">
-						Cancel
-					</Button>
-				</a>
-				<Button type="submit" class="btn-primary" [disabled]="!createForm.valid">
+				<button type="button" class="btn-ghost">
+					Cancel
+				</button>
+				<button type="submit" class="btn-primary" [disabled]="!createForm.valid">
 					Continue
-				</Button>
+				</button>
 			</div>
 		</form>
 	</div>
