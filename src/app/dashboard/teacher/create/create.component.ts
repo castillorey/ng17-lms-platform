@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
   FormControl,
@@ -8,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../core/services/toast.service';
+import { DataService } from '../../../core/services/data.service';
+import { Course } from '../../../core/models/course.interface';
 
 @Component({
   selector: 'app-create',
@@ -18,8 +19,8 @@ import { ToastService } from '../../../core/services/toast.service';
 })
 export class CreateComponent {
   private readonly router = inject(Router);
-  private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastService);
+  private readonly dataService = inject(DataService);
 
   createForm = new FormGroup({
     title: new FormControl({ value: '', disabled: false }, Validators.required),
@@ -27,15 +28,20 @@ export class CreateComponent {
 
   constructor() {}
 
-  onSubmit() {
+  async onSubmit() {
     this.createForm.disable();
-    this.http.post('/api/courses', this.createForm.value).subscribe({
-      next: (response) => {
-        this.router.navigateByUrl(`/teacher/courses/${response}`);
+    const course = this.createForm.value as Course;
+    this.dataService.startCourse(course)
+    .then((response: any) => {
+      if (response.status >= 200 && response.status , 300) {
+        const {data: [{id}]} = response;        
         this.toast.success('Course created');
-      },
-      error: () => this.toast.error('Something went wrong'),
-    });
-    this.createForm.enable();
+        this.router.navigateByUrl(`/teacher/courses/${id}`, { replaceUrl: true })
+      } else {
+        this.toast.error('Something went wrong')
+      }
+    })
+    .catch(() => this.toast.error('Something went wrong'))
+    .finally(() => this.createForm.enable());
   }
 }

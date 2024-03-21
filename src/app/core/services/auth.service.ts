@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthChangeEvent, AuthSession, Session, User } from '@supabase/supabase-js';
 import { BehaviorSubject } from 'rxjs';
 import { SupabaseService } from './supabase.service';
@@ -8,7 +7,6 @@ import { SupabaseService } from './supabase.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly router = inject(Router);
   private readonly supabaseService = inject(SupabaseService);
   private _currentUser: BehaviorSubject<boolean | User | any> =
     new BehaviorSubject(null);
@@ -30,7 +28,6 @@ export class AuthService {
       console.log(event, session);
       if (event == 'SIGNED_IN') {
         this._currentUser.next(session!.user);
-        this.router.navigateByUrl('/', { replaceUrl: true });
       } else {
         this._currentUser.next(false);
       }
