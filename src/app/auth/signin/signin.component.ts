@@ -1,34 +1,39 @@
-import { Component, inject } from '@angular/core';
-import { SupabaseService } from '../../core/services/supabase.service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, afterRender, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
 export class SigninComponent {
-  private readonly supabase = inject(SupabaseService);
-  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
-  signInForm = this.formBuilder.group({
-    email: '',
-  })
+  email = new FormControl('');
+  linkSuccess = false;
 
-  async onSubmit(): Promise<void> {
-    try {
-      const email = this.signInForm.value.email as string
-      const { error } = await this.supabase.signIn(email)
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
+  constructor() {
+    this.authService.currentUser.subscribe((user) => {
+      if (user) {
+        this.router.navigateByUrl('/', { replaceUrl: true })
       }
-    } finally {
-      this.signInForm.reset()
+    });
+  }
+
+  async signIn() {
+    this.email.disable();
+    const result = await this.authService.signInWithEmail(this.email.value!);
+    this.email.enable();
+
+    if (!result?.error) {
+      this.linkSuccess = true
+    } else {
+      alert(result.error.message)
     }
   }
 }
