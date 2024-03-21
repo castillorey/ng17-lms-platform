@@ -10,8 +10,6 @@ export class SupabaseService {
   client!: SupabaseClient;
   private readonly ngZone = inject(NgZone);
   constructor() {
-    console.log("Initializzing SupabaseService");
-    
     this.client = this.ngZone.runOutsideAngular(() => createClient(environment.supabase.url, environment.supabase.key));
   }
 }

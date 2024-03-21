@@ -13,19 +13,7 @@ export class AuthService {
   _session: AuthSession | null = null
 
   constructor() {
-    this.supabaseService.client.auth.getSession()
-    .then(({data: {session: user}}) => {
-      console.log(user);
-      if (user) {
-        this._currentUser.next(user);
-      } else {
-        this._currentUser.next(false);
-      }
-    })
-    .catch(error => console.log(error));
-
     this.supabaseService.client.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
       if (event == 'SIGNED_IN') {
         this._currentUser.next(session!.user);
       } else {
