@@ -3,7 +3,7 @@
 </div>
 
 <div>
-	<a href="/" *ngIf="isTeacherPage || isCoursePage; else isTeacher">
+	<a [routerLink]="['/']" *ngIf="isTeacherPage || isCoursePage; else isTeacher">
 		<button class="btn-ghost inline-flex items-center"> 
 			<lucide-icon [img]="logOutIcon" class="h-4 mr-1"></lucide-icon> 
 			<span>Exit</span>
@@ -11,7 +11,7 @@
 	</a>
 
 	<ng-template #isTeacher>
-		<a href="/teacher/courses">
+		<a [routerLink]="['/teacher/courses']">
 			<button class="btn-ghost"> Teacher mode </button>
 		</a>
 	</ng-template>

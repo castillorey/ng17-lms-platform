@@ -20,7 +20,7 @@ export class SigninComponent {
   constructor() {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
-        this.router.navigateByUrl('/', { replaceUrl: true })
+        this.router.navigate(['/'])
       }
     });
   }

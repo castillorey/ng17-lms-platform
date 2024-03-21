@@ -1,12 +1,12 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LogOut, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar-routes',
   standalone: true,
-  imports: [NgIf, LucideAngularModule],
+  imports: [NgIf, LucideAngularModule, RouterLink],
   templateUrl: './navbar-routes.component.html',
   styleUrl: './navbar-routes.component.scss'
 })

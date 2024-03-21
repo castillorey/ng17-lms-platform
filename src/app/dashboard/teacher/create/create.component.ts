@@ -36,7 +36,7 @@ export class CreateComponent {
       if (response.status >= 200 && response.status , 300) {
         const {data: [{id}]} = response;        
         this.toast.success('Course created');
-        this.router.navigateByUrl(`/teacher/courses/${id}`, { replaceUrl: true })
+        this.router.navigate([`/teacher/courses/${id}`]);
       } else {
         this.toast.error('Something went wrong')
       }
