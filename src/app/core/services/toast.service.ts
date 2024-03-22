@@ -16,6 +16,7 @@ export class ToastService {
   public toastState = signal(TOAST_STATE.success);
 
   constructor() {}
+
   private showToast(toastState: string, toastMessage: string): void {
     const setStates = () => {
       this.toastState.set(toastState);

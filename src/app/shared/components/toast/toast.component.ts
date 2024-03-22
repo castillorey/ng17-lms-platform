@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { ToastService } from '../../../core/services/toast.service';
   styleUrl: './toast.component.scss',
   animations: [
     trigger('toastTrigger', [
-      state('open', style({ transform: 'translateY(0%)' })),
-      state('close', style({ transform: 'translateY(-200%)' })),
+      state('open', style({ transform: 'translateY(0%)', visibility: 'visible' })),
+      state('close', style({ transform: 'translateY(-200%)'})),
       transition('close => open', [
         animate('300ms ease-in-out')
       ]),
