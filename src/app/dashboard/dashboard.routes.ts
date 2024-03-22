@@ -4,6 +4,7 @@ import { RootComponent } from "./root/root.component";
 import { AnalyticsComponent } from "./teacher/analytics/analytics.component";
 import { CreateComponent } from "./teacher/create/create.component";
 import { CourseComponent } from "./teacher/course/course.component";
+import { CoursesComponent } from "./teacher/courses/courses.component";
 
 export const DASHBOARD_ROUTES: Routes = [
 	{
@@ -13,6 +14,10 @@ export const DASHBOARD_ROUTES: Routes = [
 	{
 		path: 'search',
 		component: SearchComponent
+	},
+	{
+		path: 'teacher/courses',
+		component: CoursesComponent
 	},
 	{
 		path: 'teacher/courses/:id',
