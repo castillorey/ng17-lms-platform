@@ -2,11 +2,12 @@ import { Component, afterRender, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { AtSign, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, LucideAngularModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
@@ -16,7 +17,7 @@ export class SigninComponent {
 
   email = new FormControl('');
   linkSuccess = false;
-
+  atSignIcom = AtSign
   constructor() {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
