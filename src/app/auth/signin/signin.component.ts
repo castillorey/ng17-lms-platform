@@ -23,9 +23,8 @@ export class SigninComponent {
   atSignIcom = AtSign
   constructor() {
     this.authService.currentUser.subscribe((user) => {
-      if (user) {
+      if (user)
         this.ngZone.run(() => this.router.navigate(['/']));
-      }
     });
   }
 

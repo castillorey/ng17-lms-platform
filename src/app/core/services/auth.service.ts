@@ -10,7 +10,7 @@ export class AuthService {
   private readonly supabaseService = inject(SupabaseService);
   private _currentUser: BehaviorSubject<boolean | User | any> =
     new BehaviorSubject(null);
-  _session: AuthSession | null = null
+  _session: AuthSession | null = null;
 
   constructor() {
     this.supabaseService.client.auth.onAuthStateChange((event, session) => {
@@ -28,8 +28,8 @@ export class AuthService {
     });
   }
 
-  logout() {
-    this.supabaseService.client?.auth.signOut();
+  logout() : Promise<any>{
+    return this.supabaseService.client?.auth.signOut();
   }
 
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
