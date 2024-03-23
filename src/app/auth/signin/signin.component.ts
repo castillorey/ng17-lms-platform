@@ -1,8 +1,9 @@
-import { Component, afterRender, inject } from '@angular/core';
+import { Component, NgZone, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { AtSign, LucideAngularModule } from 'lucide-angular';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +14,9 @@ import { AtSign, LucideAngularModule } from 'lucide-angular';
 })
 export class SigninComponent {
   private readonly authService = inject(AuthService);
+  private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
+  private readonly ngZone = inject(NgZone);
 
   email = new FormControl('');
   linkSuccess = false;
@@ -21,7 +24,7 @@ export class SigninComponent {
   constructor() {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
-        this.router.navigate(['/'])
+        this.ngZone.run(() => this.router.navigate(['/']));
       }
     });
   }
@@ -34,7 +37,7 @@ export class SigninComponent {
     if (!result?.error) {
       this.linkSuccess = true
     } else {
-      alert(result.error.message)
+      this.toast.error(result.error.message)
     }
   }
 }
