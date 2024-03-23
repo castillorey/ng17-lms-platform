@@ -1,5 +1,5 @@
 import { Component, NgZone, inject } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { AtSign, LucideAngularModule } from 'lucide-angular';
@@ -18,7 +18,7 @@ export class SigninComponent {
   private readonly router = inject(Router);
   private readonly ngZone = inject(NgZone);
 
-  email = new FormControl('');
+  email = new FormControl('', Validators.required);
   linkSuccess = false;
   atSignIcom = AtSign
   constructor() {
@@ -36,8 +36,9 @@ export class SigninComponent {
 
     if (!result?.error) {
       this.linkSuccess = true
+      this.toast.success("¡Listo, Revisa tu correo!");
     } else {
-      this.toast.error(result.error.message)
+      this.toast.error(result.error.message);
     }
   }
 }
