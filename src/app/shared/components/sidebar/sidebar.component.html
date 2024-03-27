@@ -1,11 +1,11 @@
 <div class="h-full flex flex-col">
 	<div class="p-6">
-		<app-logo></app-logo>
+		<app-logo/>
 	</div>
 	
 	<div class="flex flex-col w-full">
 		@for (route of routes; track route.label) {
-			<app-sidebar-item [icon]="route.icon" [href]="route.href" [label]="route.label"></app-sidebar-item>
+			<app-sidebar-item [icon]="route.icon" [href]="route.href" [label]="route.label"/>
 		}
 	</div>
 </div>
