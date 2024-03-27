@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LucideAngularModule, Pencil } from 'lucide-angular';
 
@@ -47,7 +47,6 @@ onSubmit()
 {
   this.titleForm.disable();
   const course = this.titleForm.value as Course;
-  console.log(course);
   
   this.dataService.updateCourse(course)
   .then((response) => {

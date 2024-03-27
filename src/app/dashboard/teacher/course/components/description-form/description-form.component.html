@@ -1,0 +1,30 @@
+<div class="mt-6 border bg-slate-100 rounded-md p-4">
+	<div class="font-medium flex items-center justify-between">
+		Course description
+		<button (click)="toggleEdit()" class="ghost">
+			@if (isEditing) {
+			Cancel
+			}
+			@else {
+			<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="pencilIcon"></lucide-icon>
+			<span>Edit description</span>
+			}
+		</button>
+	</div>
+	@if (!isEditing) {
+	<p [ngClass]="{'text-sm mt-2': initialData?.description, 'text-slate-500 italic': !initialData?.description}">
+		{{initialData?.description || "No description"}}
+	</p>
+	} @else {
+	<form action="submit" [formGroup]="descriptionForm" (submit)="onSubmit()" 
+		class="space-y-4 mt-4">
+		<textarea formControlName="description" placeholder="e.g. 'This course is about...'"
+			class="form-input"></textarea>
+		<div class="flex items-center gap-x-2">
+			<button class="btn-primary" [disabled]="!descriptionForm.valid" type="submit">
+				Save
+			</button>
+		</div>
+	</form>
+	}
+</div>

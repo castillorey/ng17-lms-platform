@@ -5,11 +5,12 @@ import { Course } from '../../../core/models/course.interface';
 import { LayoutDashboard, LucideAngularModule } from 'lucide-angular';
 import { TitleFormComponent } from './components/title-form/title-form.component';
 import { NgIf } from '@angular/common';
+import { DescriptionFormComponent } from './components/description-form/description-form.component';
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [LucideAngularModule, TitleFormComponent, NgIf],
+  imports: [LucideAngularModule, NgIf, TitleFormComponent, DescriptionFormComponent],
   templateUrl: './course.component.html',
   styleUrl: './course.component.scss'
 })
