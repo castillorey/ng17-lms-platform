@@ -1,0 +1,31 @@
+<div class="mt-6 border bg-slate-100 rounded-md p-4">
+	<div class="font-medium flex items-center justify-between">
+		Course title
+		<button (click)="toggleEdit()" class="ghost">
+			@if (isEditing) {
+			Cancel
+			}
+			@else {
+			<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="pencilIcon"></lucide-icon>
+			<span>Edit title</span>
+			}
+
+		</button>
+	</div>
+	@if (!isEditing) {
+	<p class="text-sm mt-2">
+		{{initialData?.title}}
+	</p>
+	} @else {
+	<form action="submit" [formGroup]="titleForm" (submit)="onSubmit()" 
+		class="space-y-4 mt-4">
+		<input formControlName="title" placeholder="e.g. 'Advanced web development'"
+			class="form-input">
+		<div class="flex items-center gap-x-2">
+			<button class="btn-primary" [disabled]="!titleForm.valid" type="submit">
+				Save
+			</button>
+		</div>
+	</form>
+	}
+</div>

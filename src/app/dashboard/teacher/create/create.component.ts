@@ -33,12 +33,12 @@ export class CreateComponent {
     const course = this.createForm.value as Course;
     this.dataService.startCourse(course)
     .then((response: any) => {
-      if (response.status >= 200 && response.status , 300) {
+      if (response.status >= 200 && response.status < 300) {
         const {data: [{id}]} = response;        
         this.toast.success('Course created');
         this.router.navigate([`/teacher/courses/${id}`]);
       } else {
-        this.toast.error('Something went wrong')
+        throw new Error();
       }
     })
     .catch(() => this.toast.error('Something went wrong'))

@@ -33,7 +33,7 @@ export class DataService {
       .single();
   }
 
-  async updateCourse(course: any) {
+  async updateCourse(course: Course) {
     return await this.supabaseService.client
       .from(COURSE_TABLE)
       .update(course)
