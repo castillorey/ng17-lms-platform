@@ -1,0 +1,39 @@
+<div class="mt-6 border bg-slate-100 rounded-md p-4">
+	<div class="font-medium flex items-center justify-between">
+		Course image
+		<button (click)="toggleEdit()" class="ghost">
+			@if (isEditing) {
+			Cancel
+			}
+			@else {
+				@if(initialData?.image_url) {
+					<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="pencilIcon"></lucide-icon>
+					<span>Edit image</span>
+				} @else {
+					<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="plusIcon"></lucide-icon>
+					<span>Add an image</span>
+				}
+			}
+		</button>
+	</div>
+	@if (!isEditing) {
+		@if (initialData?.image_url) {
+			<div class="relative aspect-video mt-2">
+				<img alt="Upload" [src]="initialData?.image_url"
+					class="object-cover rounded-md">
+			</div>
+		} @else {
+			<div class="flex items-center justify-center h-60 bg-slate-200 rounded-md mt-2">
+				<lucide-icon class="h-10 w-10 text-slate-500" [img]="imageIcon"/>
+			</div>
+		}
+		
+	} @else {
+		<div class="mt-2">
+			<app-file-upload [courseId]="courseId" (fileUpload)="onImageUpload($event)"/>
+			<div class="text-xs text-muted-foreground mt-4">
+				16:9 aspect ratio recommended
+			</div>
+		</div>
+	}
+</div>
