@@ -39,4 +39,8 @@ export class AuthService {
   get currentUser() {
     return this._currentUser.asObservable();
   }
+
+  get immediateUser(): User {
+    return this._currentUser.getValue();
+  }
 }

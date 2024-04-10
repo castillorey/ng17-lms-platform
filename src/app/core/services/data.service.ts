@@ -9,7 +9,7 @@ export const USER_COURSE_TABLE = 'user_course';
 })
 export class DataService {
   private readonly supabaseService = inject(SupabaseService);
-
+  // CRUD Course
   async startCourse(course: Course) {
     return this.supabaseService.client
       .from(COURSE_TABLE)
@@ -24,7 +24,6 @@ export class DataService {
     return courses.data || [];
   }
 
-  // CRUD Course
   async getCourseInfo(courseId: string) {
     return await this.supabaseService.client
       .from(COURSE_TABLE)
@@ -45,5 +44,24 @@ export class DataService {
       .from(COURSE_TABLE)
       .delete()
       .match({ id: course.id });
+  }
+
+  // CRUD Files
+  async getBucketFiles() {
+    const { data, error } = await this.supabaseService.client.storage.getBucket('files');
+    return { data, error };
+  }
+
+  async uploadFile(path: string, file: File) {
+    const { data, error } = await this.supabaseService.client.storage
+      .from('files')
+      .upload(path, file);
+    return { data, error };
+  }
+
+  async downloadFile(path: string) {
+    const { data } = await this.supabaseService.client.storage.from('files').list(path);
+
+    return { data };
   }
 }

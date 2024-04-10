@@ -1,0 +1,19 @@
+<div class="relative border-2 border-dotted border-slate-300 rounded w-full h-60 flex flex-col items-center justify-center"
+	appDnd (fileDropped)="onFileDropped($event)">
+	<lucide-icon class="h-10 w-10 text-slate-500" [img]="uploadIcon" />
+
+	<input type="file" id="thumbnail" class="absolute top-0 left-0 w-full h-full opacity-0" 
+		(change)="onChooseFile($event)"
+		accept="image/x-png,image/jpeg">
+	<label for="thumbnail">
+		<p class="text-sm font-semibold text-blue-500">Choose files or drag and drop</p>
+	</label> 
+	<span class="text-xs text-slate-500">Image (4MB)</span>
+	<button *ngIf="loading || uploading || file" type="button" 
+		class="z-50 mt-2 flex items-center rounded-lg bg-blue-500 px-4 py-2 text-white disabled:opacity-50"
+		[disabled]="!file"
+		(click)="uploadFile()">
+		<app-spin *ngIf="loading || uploading"/>
+		<span class="text-sm"> {{loading ? "Processing..." : uploading ? "Uploading..." : "Upload" }} </span>
+  </button>
+</div>
