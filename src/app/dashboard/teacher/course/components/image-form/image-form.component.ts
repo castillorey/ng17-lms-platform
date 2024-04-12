@@ -7,6 +7,7 @@ import { DataService } from '../../../../../core/services/data.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { NgClass } from '@angular/common';
 import { FileUploadComponent } from '../../../../../shared/components/file-upload/file-upload.component';
+import { CourseDto } from '../../../../../core/models/course-dto.interface';
 
 @Component({
   selector: 'app-image-form',
@@ -19,10 +20,10 @@ export class ImageFormComponent {
   private readonly dataService = inject(DataService);
   private readonly toast = inject(ToastService);
   
-  @Input() courseId = null;
-  private _initialData!: Course | null;
+  @Input() courseId: string | undefined;
+  private _initialData!: Course | undefined;
   @Input() 
-  set initialData(course: Course | null) {
+  set initialData(course: Course | undefined) {
     this._initialData = course;
     
     if (this._initialData) {
@@ -30,7 +31,7 @@ export class ImageFormComponent {
     }
   }
   
-  get initialData(): Course | null {
+  get initialData(): Course | undefined {
     return this._initialData;
   }
   
@@ -40,7 +41,7 @@ export class ImageFormComponent {
   isEditing = false;
   imageForm = new FormGroup({
     id: new FormControl(),
-    image_url: new FormControl('', [Validators.required, Validators.minLength(1)])
+    imageUrl: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
   
   toggleEdit() {
@@ -48,20 +49,21 @@ export class ImageFormComponent {
   }
 
   onImageUpload(fileUrl: string) {
-    this.imageForm.patchValue({...this.imageForm.value, image_url: fileUrl});
+    this.imageForm.patchValue({...this.imageForm.value, imageUrl: fileUrl});
     this.onSubmit();
   }
   
   onSubmit()
   {
     this.imageForm.disable();
-    const course = this.imageForm.value as Course;
+    const {id, imageUrl: image_url} = this.imageForm.value as Course;
+    const course : CourseDto = {id, image_url};
     this.dataService.updateCourse(course)
     .then((response) => {
       if (response.status >= 200 && response.status < 300) {
         this.toggleEdit();
         this.toast.success('Course updated');
-        this.initialData = course;
+        this.initialData = this.imageForm.value as Course;
       } else {
         throw new Error();
       }

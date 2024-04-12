@@ -23,12 +23,12 @@ export class FileUploadComponent {
   private readonly authService = inject(AuthService);
   private readonly toast = inject(ToastService);
   
-  @Input() courseId = null;
+  @Input() courseId: string | undefined;
   @Output() fileUpload = new EventEmitter<any>();
 
   userId = null;
   uploadIcon = CloudUpload;
-  file: File | null = null;
+  file: File | undefined;
   loading = false;
   uploading = false;
 
@@ -69,7 +69,7 @@ export class FileUploadComponent {
         } else {
           this.fileUpload.emit(environment.supabase.storagePath + response.data.path)
         }
-        this.file = null;
+        this.file = undefined;
         this.uploading = false;
       });
   }

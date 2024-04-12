@@ -1,0 +1,31 @@
+<div class="mt-6 border bg-slate-100 rounded-md p-4">
+	<div class="font-medium flex items-center justify-between">
+		Course category
+		<button (click)="toggleEdit()" class="ghost">
+			@if (isEditing) {
+			Cancel
+			}
+			@else {
+			<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="pencilIcon"></lucide-icon>
+			<span>Edit category</span>
+			}
+		</button>
+	</div>
+	@if (!isEditing) {
+	<p [ngClass]="{'text-sm mt-2': initialData?.categoryId, 'text-slate-500 italic': !initialData?.categoryId}">
+		{{selectedOption?.label || "No category"}}
+	</p>
+	} @else {
+	<div (submit)="onSubmit()" 
+		class="space-y-4 mt-4">
+		<app-combobox [options]="categories" [default]="defaultOption" (onChange)="onOptionSelected($event)" />
+		<div class="flex items-center gap-x-2">
+			<button class="btn-primary" type="button"
+				[disabled]="!selectedOption || selectedOption.id == 0"
+				(click)="onSubmit()">
+				Save
+			</button>
+		</div>
+	</div>
+	}
+</div>

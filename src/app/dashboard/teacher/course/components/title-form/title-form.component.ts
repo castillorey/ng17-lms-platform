@@ -17,10 +17,10 @@ export class TitleFormComponent {
 private readonly dataService = inject(DataService);
 private readonly toast = inject(ToastService);
 
-@Input() courseId = null;
-private _initialData!: Course | null;
+@Input() courseId: string | undefined;
+private _initialData!: Course | undefined;
 @Input() 
-set initialData(course: Course | null) {
+set initialData(course: Course | undefined) {
   this._initialData = course;
   
   if (this._initialData) {
@@ -28,7 +28,7 @@ set initialData(course: Course | null) {
   }
 }
 
-get initialData(): Course | null {
+get initialData(): Course | undefined {
   return this._initialData;
 }
 

@@ -6,7 +6,7 @@
 			Cancel
 			}
 			@else {
-				@if(initialData?.image_url) {
+				@if(initialData?.imageUrl) {
 					<lucide-icon class="h-4 w-4 mr-2 inline-block" [img]="pencilIcon"></lucide-icon>
 					<span>Edit image</span>
 				} @else {
@@ -17,9 +17,9 @@
 		</button>
 	</div>
 	@if (!isEditing) {
-		@if (initialData?.image_url) {
+		@if (initialData?.imageUrl) {
 			<div class="relative aspect-video mt-2">
-				<img alt="Upload" [src]="initialData?.image_url"
+				<img alt="Upload" [src]="initialData?.imageUrl"
 					class="object-cover rounded-md">
 			</div>
 		} @else {
